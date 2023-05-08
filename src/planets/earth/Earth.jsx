@@ -1,7 +1,13 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from 'react'
 import * as THREE from 'three'
 import * as TWEEN from '@tweenjs/tween.js'
 import Moon from './Moon'

@@ -1,6 +1,6 @@
 import { OrbitControls } from '@react-three/drei'
 import AnimatedStars from './AnimatedStars'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useContext } from 'react'
 
 import * as THREE from 'three'
 
