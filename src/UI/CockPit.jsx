@@ -1,5 +1,5 @@
 const CockPit = () => {
-  return
+  return <div className='cockpit'></div>
 }
 
 export default CockPit
