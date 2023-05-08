@@ -13,7 +13,7 @@ import { Perf } from 'r3f-perf'
 const MainContainer = () => {
   return (
     <>
-      <Perf />
+      {/* <Perf /> */}
       {/* 
       <OrbitControls /> */}
       <UseCameraPositionLogging event='mousedown' />
