@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 
 import MainContainer from './MainContainer'
 import DyanmicHeader from './UI/DynamicHeader'
+import CockPit from './UI/CockPit'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <color attach='background' args={['black']} />
         <MainContainer />
       </Canvas>
+      {/* <CockPit /> */}
       <DyanmicHeader />
     </>
   )

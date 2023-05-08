@@ -14,6 +14,18 @@ body,
 
 /* COCK PIT */
 
+/* .cockpit {
+  width: 100vw;
+  height: 20vh;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-top: solid 10px rgb(145, 197, 230);
+
+  position: absolute;
+  bottom: 0;
+  background-color: grey;
+} */
+
 /* DYNAMIC HEADER */
 
 .dynamic-header-flex-container {
