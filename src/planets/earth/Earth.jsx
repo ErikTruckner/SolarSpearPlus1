@@ -13,134 +13,139 @@ import * as TWEEN from '@tweenjs/tween.js'
 import Moon from './Moon'
 import ISS from './ISS'
 
-const Earth = React.memo(({ displacementScale }) => {
-  const earthRef = useRef()
-  const clockRef = useRef(new THREE.Clock())
+const Earth = React.memo(
+  ({ displacementScale, earthSystem, setEarthSystem }) => {
+    const earthRef = useRef()
+    const clockRef = useRef(new THREE.Clock())
 
-  const { camera } = useThree()
+    const { camera } = useThree()
 
-  const [hovered, setHovered] = useState(false)
-  const [followingEarth, setFollowingEarth] = useState(false)
-  const [cameraPosition, setCameraPosition] = useState(
-    new THREE.Vector3(16.14, 8.32, 19.81)
-  )
-  const [cameraTarget, setCameraTarget] = useState(new THREE.Vector3(0, 0, 0))
+    const [hovered, setHovered] = useState(false)
+    const [followingEarth, setFollowingEarth] = useState(false)
+    const [cameraPosition, setCameraPosition] = useState(
+      new THREE.Vector3(16.14, 8.32, 19.81)
+    )
+    const [cameraTarget, setCameraTarget] = useState(new THREE.Vector3(0, 0, 0))
 
-  const [
-    earthTexture,
-    earthNormalMap,
-    earthSpecularMap,
-    earthDisplacementMap,
-    earthEmissiveMap,
-  ] = useTexture([
-    '/assets/earth_day.jpg',
-    '/assets/earth_normal.jpg',
-    '/assets/earth_specular.jpg',
-    '/assets/earth_displacement.jpg',
-    '/assets/earth_night.jpg',
-  ])
+    const [
+      earthTexture,
+      earthNormalMap,
+      earthSpecularMap,
+      earthDisplacementMap,
+      earthEmissiveMap,
+    ] = useTexture([
+      '/assets/earth_day.jpg',
+      '/assets/earth_normal.jpg',
+      '/assets/earth_specular.jpg',
+      '/assets/earth_displacement.jpg',
+      '/assets/earth_night.jpg',
+    ])
 
-  const updateEarthPosition = useCallback(() => {
-    const angle = clockRef.current.getElapsedTime() * 0.2
-    const distance = 13
-    const x = Math.sin(angle) * distance
-    const z = Math.cos(angle) * distance
-    earthRef.current.position.set(x, 0, z)
-    earthRef.current.rotation.y += 0.006
-  }, [])
+    const updateEarthPosition = useCallback(() => {
+      const angle = clockRef.current.getElapsedTime() * 0.2
+      const distance = 13
+      const x = Math.sin(angle) * distance
+      const z = Math.cos(angle) * distance
+      earthRef.current.position.set(x, 0, z)
+      earthRef.current.rotation.y += 0.006
+    }, [])
 
-  const toggleFollowingEarth = () => {
-    setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth)
-  }
-
-  useFrame(() => {
-    updateEarthPosition()
-    TWEEN.update()
-
-    const earthPositionRef = earthRef.current.position
-
-    if (followingEarth) {
-      const cameraTargetPosition = new THREE.Vector3(
-        earthPositionRef.x + 10,
-        earthPositionRef.y + 2,
-        earthPositionRef.z + 5
-      )
-
-      new TWEEN.Tween(cameraPosition)
-        .to(cameraTargetPosition, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraPosition(cameraPosition)
-        })
-        .start()
-
-      // Create a new tween for cameraTarget lookAt
-      new TWEEN.Tween(cameraTarget)
-        .to(earthPositionRef, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraTarget(cameraTarget)
-        })
-        .start()
-    } else {
-      const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
-      const originalCameraTarget = new THREE.Vector3(0, 0, 0)
-
-      new TWEEN.Tween(cameraPosition)
-        .to(originalCameraPosition, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraPosition(cameraPosition)
-        })
-        .start()
-
-      // Create a new tween for cameraTarget
-      new TWEEN.Tween(cameraTarget)
-        .to(originalCameraTarget, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraTarget(cameraTarget)
-        })
-        .start()
+    const toggleFollowingEarth = () => {
+      setEarthSystem((prevEarthSystem) => ({
+        ...prevEarthSystem,
+        followingEarth: !prevEarthSystem.followingEarth,
+      }))
     }
 
-    camera.position.copy(cameraPosition)
-    camera.lookAt(cameraTarget)
-    camera.updateProjectionMatrix()
-  })
+    useFrame(() => {
+      updateEarthPosition()
+      TWEEN.update()
 
-  useEffect(() => {
-    document.body.style.cursor = hovered ? 'pointer' : 'auto'
-  }, [hovered])
+      const earthPositionRef = earthRef.current.position
 
-  return (
-    <group ref={earthRef}>
-      <mesh
-        castShadow
-        receiveShadow
-        onClick={toggleFollowingEarth}
-        // Use pointerEvents to change cursor on hover
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}>
-        {/*  */}
+      if (followingEarth) {
+        const cameraTargetPosition = new THREE.Vector3(
+          earthPositionRef.x + 10,
+          earthPositionRef.y + 2,
+          earthPositionRef.z + 5
+        )
 
-        <sphereGeometry args={[1, 64, 64]} />
-        <meshPhongMaterial
-          map={earthTexture}
-          normalMap={earthNormalMap}
-          emissiveMap={earthEmissiveMap}
-          emissive={0xffffff}
-          emissiveIntensity={hovered ? 20 : 1.5}
-          specularMap={earthSpecularMap}
-          shininess={100}
-          displacementMap={earthDisplacementMap}
-          displacementScale={displacementScale}
-        />
-      </mesh>
-      <Moon />
-      <ISS />
-    </group>
-  )
-})
+        new TWEEN.Tween(cameraPosition)
+          .to(cameraTargetPosition, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraPosition(cameraPosition)
+          })
+          .start()
+
+        // Create a new tween for cameraTarget lookAt
+        new TWEEN.Tween(cameraTarget)
+          .to(earthPositionRef, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraTarget(cameraTarget)
+          })
+          .start()
+      } else {
+        const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
+        const originalCameraTarget = new THREE.Vector3(0, 0, 0)
+
+        new TWEEN.Tween(cameraPosition)
+          .to(originalCameraPosition, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraPosition(cameraPosition)
+          })
+          .start()
+
+        // Create a new tween for cameraTarget
+        new TWEEN.Tween(cameraTarget)
+          .to(originalCameraTarget, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraTarget(cameraTarget)
+          })
+          .start()
+      }
+
+      camera.position.copy(cameraPosition)
+      camera.lookAt(cameraTarget)
+      camera.updateProjectionMatrix()
+    })
+
+    useEffect(() => {
+      document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    }, [hovered])
+
+    return (
+      <group ref={earthRef}>
+        <mesh
+          castShadow
+          receiveShadow
+          onClick={toggleFollowingEarth}
+          // Use pointerEvents to change cursor on hover
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}>
+          {/*  */}
+
+          <sphereGeometry args={[1, 64, 64]} />
+          <meshPhongMaterial
+            map={earthTexture}
+            normalMap={earthNormalMap}
+            emissiveMap={earthEmissiveMap}
+            emissive={0xffffff}
+            emissiveIntensity={hovered ? 20 : 1.5}
+            specularMap={earthSpecularMap}
+            shininess={100}
+            displacementMap={earthDisplacementMap}
+            displacementScale={displacementScale}
+          />
+        </mesh>
+        <Moon />
+        <ISS />
+      </group>
+    )
+  }
+)
 
 export default Earth

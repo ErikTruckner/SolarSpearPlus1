@@ -11,6 +11,11 @@ import Sun from './planets/sun/Sun'
 import { Perf } from 'r3f-perf'
 
 const MainContainer = () => {
+  const [earthSystem, setEarthSystem] = useState({
+    followingEarth: false,
+    // other Earth-related state properties
+  })
+
   return (
     <>
       {/* <Perf /> */}
@@ -35,7 +40,13 @@ const MainContainer = () => {
       <ambientLight intensity={0.1} />
       <Sun />
 
-      <Earth position={[7, 0, 0]} displacementScale={0.05} />
+      <Earth
+        position={[7, 0, 0]}
+        displacementScale={0.05}
+        earthSystem={earthSystem}
+        setEarthSystem={setEarthSystem}
+        onToggleFollowingEarth={handleToggleFollowingEarth}
+      />
     </>
   )
 }
