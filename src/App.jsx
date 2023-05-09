@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 
 import MainContainer from './MainContainer'
@@ -5,6 +6,7 @@ import DyanmicHeader from './UI/DynamicHeader'
 import CockPit from './UI/CockPit'
 
 function App() {
+  const [followingEarth, setFollowingEarth] = useState(false)
   return (
     <>
       <Canvas
@@ -16,10 +18,16 @@ function App() {
           position: [16.14, 8.32, 19.81],
         }}>
         <color attach='background' args={['black']} />
-        <MainContainer />
+        <MainContainer
+          followingEarth={followingEarth}
+          setFollowingEarth={setFollowingEarth}
+        />
       </Canvas>
       {/* <CockPit /> */}
-      <DyanmicHeader />
+      <DyanmicHeader
+        followingEarth={followingEarth}
+        setFollowingEarth={setFollowingEarth}
+      />
     </>
   )
 }

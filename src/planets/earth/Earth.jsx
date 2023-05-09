@@ -14,14 +14,14 @@ import Moon from './Moon'
 import ISS from './ISS'
 
 const Earth = React.memo(
-  ({ displacementScale, earthSystem, setEarthSystem }) => {
+  ({ displacementScale, followingEarth, setFollowingEarth }) => {
     const earthRef = useRef()
     const clockRef = useRef(new THREE.Clock())
 
     const { camera } = useThree()
 
     const [hovered, setHovered] = useState(false)
-    const [followingEarth, setFollowingEarth] = useState(false)
+    // const [followingEarth, setFollowingEarth] = useState(false)
     const [cameraPosition, setCameraPosition] = useState(
       new THREE.Vector3(16.14, 8.32, 19.81)
     )
@@ -51,10 +51,7 @@ const Earth = React.memo(
     }, [])
 
     const toggleFollowingEarth = () => {
-      setEarthSystem((prevEarthSystem) => ({
-        ...prevEarthSystem,
-        followingEarth: !prevEarthSystem.followingEarth,
-      }))
+      setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth)
     }
 
     useFrame(() => {

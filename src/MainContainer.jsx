@@ -10,42 +10,22 @@ import Earth from './planets/earth/Earth'
 import Sun from './planets/sun/Sun'
 import { Perf } from 'r3f-perf'
 
-const MainContainer = () => {
-  const [earthSystem, setEarthSystem] = useState({
-    followingEarth: false,
-    // other Earth-related state properties
-  })
-
+const MainContainer = ({ followingEarth, setFollowingEarth }) => {
   return (
     <>
       {/* <Perf /> */}
-      {/* 
-      <OrbitControls /> */}
+      {/*<OrbitControls /> */}
       <UseCameraPositionLogging event='mousedown' />
       <AnimatedStars />
-      {/* <directionalLight
-        castShadow
-        shadow-mapSize-height={512}
-        shadow-mapSize-width={512}
-        ref={directionalLightRef}
-        position={[0, 0, 10]}
-        intensity={1}
-        // color={0xff0000}
-      />
-      <directionalLight
-        castShadow
-        ref={directionalLightRefTwo}
-        position={[0, 0, -10]}
-      /> */}
+
       <ambientLight intensity={0.1} />
       <Sun />
 
       <Earth
         position={[7, 0, 0]}
         displacementScale={0.05}
-        earthSystem={earthSystem}
-        setEarthSystem={setEarthSystem}
-        onToggleFollowingEarth={handleToggleFollowingEarth}
+        followingEarth={followingEarth}
+        setFollowingEarth={setFollowingEarth}
       />
     </>
   )
