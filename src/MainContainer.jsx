@@ -11,6 +11,11 @@ import Sun from './planets/sun/Sun'
 import { Perf } from 'r3f-perf'
 
 const MainContainer = ({ followingEarth, setFollowingEarth }) => {
+  //PERFORMANCE LOAD TIME TRACKER
+  useEffect(() => {
+    const loadTime = performance.now()
+    console.log(`App fully loaded in ${loadTime} milliseconds.`)
+  }, [])
   return (
     <>
       {/* <Perf /> */}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 
 import MainContainer from './MainContainer'
@@ -7,19 +7,6 @@ import CockPit from './UI/CockPit'
 
 function App() {
   const [followingEarth, setFollowingEarth] = useState(false)
-
-  function calculateLoadTime() {
-    const loadStartTime = performance.timing.navigationStart
-    const loadEndTime = performance.timing.loadEventEnd
-    const loadTime = loadEndTime - loadStartTime
-
-    return loadTime
-  }
-
-  window.addEventListener('load', function () {
-    const appLoadTime = calculateLoadTime()
-    console.log(`App fully loaded in ${appLoadTime} milliseconds.`)
-  })
 
   return (
     <>
