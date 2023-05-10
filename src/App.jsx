@@ -18,10 +18,16 @@ const LoadingScreen = () => {
         height: '100vh',
         backgroundColor: '#000000',
         color: '#ffffff',
-        fontSize: '14px',
+        fontSize: '24px',
         textAlign: 'center',
       }}>
-      <p>The robots are building the site...</p>
+      <p>
+        Thank you for your patience!
+        <br /> <br />
+        The robots are building the site...
+        <br /> <br />
+        Any moment now...
+      </p>
     </div>
   )
 }
