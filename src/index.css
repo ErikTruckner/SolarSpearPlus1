@@ -34,7 +34,7 @@ body,
   top: 0;
   margin-top: 0.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -104,6 +104,11 @@ body,
 .dynamic-header-h1 {
   color: white;
   font-size: 2rem;
+}
+
+.dynamic-header-mobile-instructions {
+  color: white;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 1350px) {

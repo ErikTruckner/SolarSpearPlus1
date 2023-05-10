@@ -21,7 +21,7 @@ const LoadingScreen = () => {
         fontSize: '14px',
         textAlign: 'center',
       }}>
-      <h1>The Robots are building the site...</h1>
+      <p>The robots are building the site...</p>
     </div>
   )
 }

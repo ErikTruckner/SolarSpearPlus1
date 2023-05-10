@@ -8,6 +8,7 @@ const DyanmicHeader = ({ followingEarth, setFollowingEarth }) => {
       <div className={`dynamic-header ${headerClass}`}>
         <h1 className='dynamic-header-h1'>{headerText}</h1>
       </div>
+      <p className='dynamic-header-mobile-instructions'>Tap the Earth</p>
     </div>
   )
 }
