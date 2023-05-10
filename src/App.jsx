@@ -18,7 +18,8 @@ const LoadingScreen = () => {
         height: '100vh',
         backgroundColor: '#000000',
         color: '#ffffff',
-        fontSize: '16px',
+        fontSize: '14px',
+        textAlign: 'center',
       }}>
       <h1>The Robots are building the site...</h1>
     </div>
@@ -47,7 +48,7 @@ function App() {
           fov: 55,
           near: 1,
           far: 1000,
-          position: [16.14, 8.32, 19.81],
+          position: [20, 8, 25],
         }}>
         <color attach='background' args={['black']} />
 

@@ -23,7 +23,7 @@ const Earth = React.memo(
     const [hovered, setHovered] = useState(false)
     // const [followingEarth, setFollowingEarth] = useState(false)
     const [cameraPosition, setCameraPosition] = useState(
-      new THREE.Vector3(16.14, 8.32, 19.81)
+      new THREE.Vector3(45, 18, 30)
     )
     const [cameraTarget, setCameraTarget] = useState(new THREE.Vector3(0, 0, 0))
 
@@ -84,7 +84,7 @@ const Earth = React.memo(
           })
           .start()
       } else {
-        const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
+        const originalCameraPosition = new THREE.Vector3(45, 18, 30)
         const originalCameraTarget = new THREE.Vector3(0, 0, 0)
 
         new TWEEN.Tween(cameraPosition)
