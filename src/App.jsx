@@ -14,12 +14,13 @@ const LoadingScreen = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
+        width: '100vw',
         height: '100vh',
         backgroundColor: '#000000',
         color: '#ffffff',
-        fontSize: '24px',
+        fontSize: '16px',
         textAlign: 'center',
+        overflow: 'hidden',
       }}>
       <p>
         Thank you for your patience!
@@ -33,6 +34,37 @@ const LoadingScreen = () => {
 }
 
 function App() {
+  //PREVENT MOBILE SCROLL
+  useEffect(() => {
+    disableScroll()
+
+    // Clean up function (optional)
+    return () => {
+      null
+    }
+  }, [])
+
+  const disableScroll = () => {
+    // Save the current scroll position
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
+
+    // Add styles to the body to disable scrolling
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollPosition}px`
+    document.body.style.width = '100%'
+
+    // Prevent the page from jumping back to the original scroll position
+    document.body.style.marginTop = `-${scrollPosition}px`
+  }
+
+  //
+  //
+
   const [followingEarth, setFollowingEarth] = useState(false)
 
   const [isLoaded, setIsLoaded] = useState(false)
@@ -47,6 +79,7 @@ function App() {
     <>
       {!isLoaded && <LoadingScreen />}
       <Canvas
+        id='canvas'
         ref={canvasRef}
         onCreated={handleCreated}
         shadows
