@@ -21,7 +21,12 @@ const Earth = React.memo(
     const { camera } = useThree()
 
     const [hovered, setHovered] = useState(false)
+    //
+    //
+    // ////////// LIFTED STATE TO APP ////////////////
     // const [followingEarth, setFollowingEarth] = useState(false)
+    ////////////
+    //////////////
     const [cameraPosition, setCameraPosition] = useState(
       new THREE.Vector3(45, 18, 30)
     )
@@ -54,8 +59,7 @@ const Earth = React.memo(
       setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth)
     }
 
-    useFrame(() => {
-      updateEarthPosition()
+    const tweenLogic = useCallback(() => {
       TWEEN.update()
 
       const earthPositionRef = earthRef.current.position
@@ -104,10 +108,14 @@ const Earth = React.memo(
           })
           .start()
       }
-
       camera.position.copy(cameraPosition)
       camera.lookAt(cameraTarget)
       camera.updateProjectionMatrix()
+    })
+
+    useFrame(() => {
+      updateEarthPosition()
+      tweenLogic()
     })
 
     useEffect(() => {
