@@ -141,6 +141,12 @@ body,
 /* DynamicButtonMenu */
 
 .dynamic-button-menu-container {
+  width: fit-content;
+  height: fit-content;
+  background-color: aliceblue;
+  border: 5px solid rgb(124, 135, 197);
+  border-radius: 40px;
+  opacity: 0.9;
 }
 
 /* EarthButton */
@@ -148,9 +154,11 @@ body,
 .earth-button-container {
   width: 50px;
   height: 50px;
-  border: 1rem dashed white;
-  padding: 0.5rem;
+  border: 2px dashed white;
+  padding: 1rem;
 }
 
 .earth-button-img {
+  width: 50px;
+  height: 50px;
 }

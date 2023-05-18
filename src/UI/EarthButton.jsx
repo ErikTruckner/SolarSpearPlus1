@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../index.css'
 
-import earthTN from '../images/earthTN.jpg'
+import earthTN from '../images/earthTN.png'
 
 const EarthButton = () => {
   return (
