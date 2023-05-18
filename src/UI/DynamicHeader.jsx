@@ -1,4 +1,5 @@
 import '../index.css'
+import DynamicButtonMenu from './DynamicButtonMenu'
 
 const DyanmicHeader = ({ followingEarth, setFollowingEarth }) => {
   const headerText = followingEarth ? 'Earth System' : 'Solar System'
@@ -9,6 +10,7 @@ const DyanmicHeader = ({ followingEarth, setFollowingEarth }) => {
         <h1 className='dynamic-header-h1'>{headerText}</h1>
       </div>
       <p className='dynamic-header-mobile-instructions'>Tap the Earth</p>
+      <DynamicButtonMenu />
     </div>
   )
 }
