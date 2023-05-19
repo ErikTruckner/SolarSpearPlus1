@@ -1,3 +1,4 @@
+import './index.css'
 import { useState, useEffect, Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 
@@ -7,21 +8,7 @@ import CockPit from './UI/CockPit'
 
 const LoadingScreen = () => {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#000000',
-        color: '#ffffff',
-        fontSize: '16px',
-        textAlign: 'center',
-        overflow: 'hidden',
-      }}>
+    <div className='loading-screen'>
       <p>
         Thank you for your patience!
         <br /> <br />
@@ -29,6 +16,7 @@ const LoadingScreen = () => {
         <br /> <br />
         Any moment now...
       </p>
+      <div class='loader'></div>
     </div>
   )
 }

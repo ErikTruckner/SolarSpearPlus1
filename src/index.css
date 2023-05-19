@@ -32,6 +32,43 @@ body,
   background-color: grey;
 } */
 
+/* LOADER */
+
+.loading-screen {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.loader {
+  margin-top: 1rem;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* START SCREEN */
 
 .start-screen {
